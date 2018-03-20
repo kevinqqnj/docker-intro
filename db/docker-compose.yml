@@ -1,11 +1,16 @@
-﻿version: '3'
+version: '3'
 # docker-compose run web django-admin.py startproject composeexample .
-
+# docker volumn create pgdata
+# docker-compose up --build
+# docker-compose run web bash
+# -> python manage.py migrate
+# -> createsuperuser
 services:
   db:
     image: postgres:9
     volumes:
-      - pg_data:/data/pg
+      - pgdata:/var/lib/postgresql/data
+
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:5000
@@ -17,5 +22,5 @@ services:
       - db
 
 volumes:
-  redis_data:
-  pg_data:
+#   redis_data:
+  pgdata:
