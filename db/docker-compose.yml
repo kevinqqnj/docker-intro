@@ -1,0 +1,15 @@
+﻿version: '3'
+# docker-compose run web django-admin.py startproject composeexample .
+
+services:
+  db:
+    image: postgres:9
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:5000
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
